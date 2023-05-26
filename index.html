@@ -72,14 +72,10 @@
                 margin-right: 5px;
             }
             .shape {
-                width: 0;
-                height: 0;
-                border-style: solid ;
-                border-width: 0 10px 20px 15px;
-                border-color: transparent transparent rgba(232,112,62) transparent;
-                border-radius: 999%;
+                width: 25px;
+                height: 25px;
                 background: rgba(232,112,62);
-                clip-path: polygon(50% 0%, 0 50%, 50% 100%);
+                clip-path: polygon(43% 8%, 39% 12%, 33% 18%, 26% 24%, 20% 28%, 13% 32%, 7% 38%, 1% 42%, 0% 48%, 4% 52%, 9% 56%, 14% 60%, 19% 64%, 24% 68%, 28% 72%, 32% 77%, 37% 81%, 42% 81%, 45% 77%, 43% 69%, 44% 64%, 48% 63%, 54% 63%, 63% 63%, 68% 63%, 72% 67%, 75% 68%, 78% 70%, 83% 76%, 87% 81%, 90% 85%, 91% 91%, 94% 96%, 99% 92%, 100% 90%, 100% 84%, 100% 80%, 99% 73%, 99% 66%, 96% 62%, 94% 54%, 88% 48%, 83% 43%, 77% 39%, 71% 34%, 65% 33%, 59% 31%, 54% 30%, 47% 29%, 44% 28%, 44% 21%, 44% 17%, 44% 11%);
             }
             .round {
                 width: 0;
@@ -144,7 +140,10 @@
                 </tbody>
             </table>
         </div>
-        <button class="return-button" id="settings"><div class="shape"></div></button>
+        <button class="return-button" id="settings">
+            <div class="shape"></div>
+            <!-- <img src="./button.png" width="41px" style="border-radius: 50%;"> -->
+        </button>
         <div id="popDiv">
             <h1>傻逼大学习~</h1>
             <input type="text" placeholder="姓名" id="sbname">
