@@ -1,0 +1,221 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>青年大学习</title>
+        <!-- 红杏枝头春意闹，你家傻逼坟上跳 -->
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                background: linear-gradient(rgba(249,164,109), rgba(252,116,94));
+            }
+            h1 {
+                font-size: 20px;
+                text-shadow: 1px 1px 4px #313131, -1px -1px 4px #313131;
+                text-align: center;
+                color: rgba(254,255,255);
+            }
+            .bluebox {
+                position: absolute;
+                margin-top: 3px;
+                margin-left: 20px;
+                width: max-content;
+                box-sizing: border-box;
+                padding-left: 5px;
+                padding-right: 5px;
+                height: fit-content;
+                line-height: 160%;
+                background: rgba(45,183,246);
+                border-radius: 5px;
+                color: rgba(254,255,255);
+            }
+            .table {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+                width: 100%;
+                height: max-content;
+            }
+            table {
+                width: 95%;
+                background: rgba(255,255,255);
+                border-collapse: collapse;
+            }
+            th {
+                background: rgba(255,237,237);
+                border: 1px solid rgba(238,238,238);
+                font-family: 等线Light;
+                height: 50px;
+            }
+            td {
+                height: 75px;
+                text-align: center;
+                border: 1px solid rgba(238,238,238);
+            }
+            .return-button {
+                position: fixed;
+                bottom: 100px;
+                right: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: rgba(255,236,210);
+                width: 40px;
+                height: 40px;
+                border: none;
+                border-radius: 50%;
+                /* transform: rotate(45deg); */
+                margin-right: 5px;
+            }
+            .shape {
+                width: 0;
+                height: 0;
+                border-style: solid ;
+                border-width: 0 10px 20px 15px;
+                border-color: transparent transparent rgba(232,112,62) transparent;
+                border-radius: 999%;
+                background: rgba(232,112,62);
+                clip-path: polygon(50% 0%, 0 50%, 50% 100%);
+            }
+            .round {
+                width: 0;
+                height: 0;
+            }
+            /*某些人傻逼能不能死一边去，自己觉得自己了不起可以滚了*/
+            #popDiv {
+                display: none;
+                position: fixed;
+                width: 80%;
+                height: 60%;
+                margin-left: 10%;
+                top: 20%;
+                overflow-y: scroll;
+                background: rgba(255,255,255,0.7);
+                backdrop-filter: blur(10px);
+                border-radius: 10px;
+                box-sizing: border-box;
+                padding: 10px 10px 10px 10px;
+                line-height: 200%;
+                z-index: 6;
+            }
+            /* 疯狗天天叫，叫他妈上吊 */
+            #popDiv > input {
+                width: 80%;
+                height: 30px;
+                margin-top: 30px;
+                margin-left: 10%;
+                border: 1px solid rgba(250,145,103);
+                padding-left: 5px;
+                font-size: 18px;
+                color: rgb(63, 63, 63);
+            }
+            #popDiv > button {
+                width: 40%;
+                height: 60px;
+                background: rgba(45,183,246);
+                border: none;
+                margin-top: 30px;
+                margin-left: 30%;
+                border-radius: 10px;
+                font-size: 20px;
+                color: rgba(255,255,255);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bluebox"><span>数据统计</span></div>
+        <h1 style="margin-top: 15px;">我的学习记录</h1>
+        <span style="margin-left: 60%; " id="thisYear">年度： </span>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="80px">期数</th>
+                        <th width="140px">学习团组织</th>
+                        <th>登录信息</th>
+                    </tr>
+                </thead>
+                <tbody id="sbdxx">
+                    <!-- 傻逼大学习 -->
+                </tbody>
+            </table>
+        </div>
+        <button class="return-button" id="settings"><div class="shape"></div></button>
+        <div id="popDiv">
+            <h1>傻逼大学习~</h1>
+            <input type="text" placeholder="姓名" id="sbname">
+            <input type="text" placeholder="团组织" id="sbteam">
+            <input type="text" placeholder="手机号" id="sbphone">
+            <input type="text" placeholder="最新期数" id="sbterm">
+            <button id="output">设定</button>
+        </div>
+        <script>
+            // 弹出设置菜单
+            var btnOpenDiv = document.getElementById('settings')
+            var popupDiv = document.getElementById('popDiv')
+
+            btnOpenDiv.addEventListener('click', function() {
+                let isOpened = popupDiv.style.display === 'block' ? true : false
+                if (!isOpened)
+                    popupDiv.style.display = 'block'
+                else
+                    popupDiv.style.display = 'none'
+            });
+
+            //Date转时间
+            function getTime(term) {
+                var time = new Date()
+                time.setDate(time.getDate() - term * 7)
+                //生成随机小时和分钟
+                time.setHours(time.getHours() - Math.floor(Math.random() * (time.getHours())) + 1)
+                time.setMinutes(time.getMinutes() - Math.floor(Math.random() * (time.getMinutes())) + 1)
+                var year = time.getFullYear().toString().slice(-2)
+                //日你妈的叫叫叫天天狗叫
+                var month = (time.getMonth() + 1) >= 10 ? (time.getMonth() + 1) : "0" + (time.getMonth() + 1)
+                var day = time.getDate() >= 10 ? time.getDate() : "0" + time.getDate()
+                var hours = time.getHours() >= 10 ? time.getHours() : "0" + time.getHours()
+                var minutes = time.getMinutes() >= 10 ? time.getMinutes() : "0" + time.getMinutes()
+                var formatTime = year + "年" + month + "月" + day + "日" + hours + ":" + minutes
+                console.log("格式化时间： ", formatTime)
+                return formatTime
+            }
+
+            //弹出菜单功能实现
+            output.addEventListener('click', function() {
+                console.log("某些人愿意当走狗，既然愿意那我也就很乐意让他继续当下去")
+                console.log("我陪他演")
+                //吱吱吱，吱吱吱，叫你妈呢叫？你妈死了也不能这么叫
+                if (sbname.value === "陈国宇" || sbname.value === "胡阳阳") {
+                    alert("哟！" + sbname.value + "，你不是能着呢吗？怎么你今天也要用这个了？就不让你用，欸嘿！")
+                    location.reload(true)
+                }
+                var date = new Date()
+                document.getElementById('thisYear').innerHTML += date.getFullYear()
+                //绘制表格
+                for (var i = sbterm.value; i > 0; i--) {
+                    console.log("我是傻逼")
+                    var row = document.createElement('tr')
+                    //期数
+                    var termLine = document.createElement('td')
+                    termLine.textContent = "第" + i + "期"
+                    row.append(termLine)
+                    //团支部 傻逼大学习越学越傻逼
+                    var teamLine = document.createElement('td')
+                    teamLine.textContent = sbteam.value + "团支部"
+                    row.append(teamLine)
+                    //姓名
+                    var loginLine = document.createElement('td')
+                    loginLine.innerHTML = sbname.value + " " + sbphone.value + "<br>" + getTime(sbterm.value - i)
+                    row.append(loginLine)
+                    //你傻逼能不能别跟着别人一起傻逼？支那人魔怔了？？？
+                    sbdxx.append(row)
+                }
+                document.getElementById('popDiv').style.display = 'none'
+            })
+        </script>
+    </body>
+</html>
