@@ -188,14 +188,10 @@
                 console.log("某些人愿意当走狗，既然愿意那我也就很乐意让他继续当下去")
                 console.log("我陪他演")
                 if (isNaN(parseInt(sbterm.value))) {
-                    alert("你傻？期数不应该是证书吗")
+                    alert("你傻？期数不应该是整数吗")
                     sbterm.value = 0
                 }
                 //吱吱吱，吱吱吱，叫你妈呢叫？你妈死了也不能这么叫
-                if (sbname.value === "陈国宇" || sbname.value === "胡阳阳") {
-                    alert("触发禁用规则：" + sbname.value + "，怎么你今天也要用这个了？就不让你用，欸嘿！")
-                    location.reload(true)
-                }
                 var date = new Date()
                 document.getElementById('thisYear').innerHTML = "年度：" + date.getFullYear()
                 //清空表格
